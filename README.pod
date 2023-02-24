@@ -1,0 +1,74 @@
+=head1 NAME
+
+Astro::Coord::Constellations - Identify the constellation for position (RA, Dec)
+
+=head1 VERSION
+
+Version 0.01
+
+=head1 SYNOPSIS
+
+ use Astro::Coord::Constellations qw/constellation_for_eq constellations_table/;
+
+ my $constellation_abbrev = constellation_for_eq($ra, $dec, $epoch);
+
+ my %con      = constellations_table();
+ my $name     = $con{'And'}->[0];     # Andromeda
+ my $genitive = $con{'And'}->[1]; # Andromedae
+
+=head1 DESCRIPTION
+
+Identify the constellation to which a celestial position (as defined by equatorial
+coordinates for any epoch) belongs to, according to the IAU constellation boundaries.
+
+=head1 METHODS
+
+=head2 constellation_for_eq
+
+ my $constellation = constellation_for_eq($ra, $dec, $epoch);
+
+Given equatorial coordinates in hours for Right Ascension C<$ra> and degrees for
+Declination C<$dec> for epoch C<$epoch> in years AD, the constellation (abbreviation)
+is returned.
+You can pass the coordinates as the strings you find in human-readable catalogs,
+see the function C<read_coordinates> of L<Astro::Coord::Precession> for what
+formats are supported.
+
+=head1 UTILITY FUNCTIONS
+
+=head2 constellations_table
+
+ my %con = constellations_table();
+
+ $con{UMi}; # ['Ursa Minor', 'Ursa Minoris']
+
+Returns a Perl hash with constellation abbreviations as keys and arrayrefs with
+the constellation name and genitive.
+
+=head1 AUTHOR
+
+Dimitrios Kechagias, C<< <dkechag at cpan.org> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-astro-coord-constellations at rt.cpan.org>, or through
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=Astro-Coord-Constellations>.
+You could also raise issues or submit PRs to the github repo below.
+
+=head1 GIT
+
+L<https://github.com/dkechag/Astro-Coord-Constellations>
+
+=head1 ACKNOWLEDGEMENTS
+
+IAU constellation boundaries from L<ftp://cdsarc.u-strasbg.fr/pub/cats/VI/42/data.dat>.
+Based on the Fortran program CONFND by FO @ CDS  (francois@simbad.u-strasbg.fr).
+
+=head1 LICENSE AND COPYRIGHT
+
+This software is copyright (c) 2021 by Dimitrios Kechagias.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+
